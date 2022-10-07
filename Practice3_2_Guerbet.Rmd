@@ -1,0 +1,66 @@
+---
+title: "Practice 3.2"
+author: "Arnaud Guerbet"
+date: "2022-10-07"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Script
+
+```{r cars}
+setwd("C:/Users/ASUS/Desktop/NTU_Courses/R courses/Week4")
+getwd()
+
+#creation of the dataframe
+before_diet <- c(104,95,87,77,112)
+after_diet <- c(96,91,81,75,118)
+subject <- c("subject_1","subject_2","subject_3","subject_4","subject_5")
+dat <- data.frame(subject, before_diet, after_diet)
+dat
+
+#reformate dataset
+library("tidyr")
+dat2<- dat %>% pivot_longer(cols = c(2:3), names_to = "time", values_to = "weight")
+dat2
+typeof(dat2$weight)#already a double but if not use the next linecode
+dat2$weight<- as.double(dat2$weight)
+typeof(dat2$weight)
+
+#Creation of a list
+#Element1
+dat2
+
+#Element2
+#Vestor of  charachers
+WLoss_Subject<-dat$subject
+WLoss_Subject
+typeof(WLoss_Subject)
+#Purcentage of loss weight
+WLoss_value<-(dat$after_diet-dat$before_diet)/100*dat$before_diet
+WLoss_value
+typeof(WLoss_value)#already double
+#table with the combination of the tow first elements
+WLoss_Table<-data.frame(WLoss_Subject,WLoss_value)
+WLoss_Table
+#Creation of the list
+WEIGHT_LOSS<-list(WLoss_Subject=WLoss_Subject,WLoss_value=WLoss_value,WLoss_Table=WLoss_Table)
+WEIGHT_LOSS
+
+#Element3
+MESSAGE<- "R, my lover, you are everything I want in my futur, 
+manipuling numeric or character, is for me more than holidays in summer,
+Sometimes I feel like a computer, using matrice, List or vector, 
+My dream is to become an integer"
+
+
+BUBBLE_DIET <- list(dat2 = dat2, WEIGHT_LOSS = WEIGHT_LOSS, MESSAGE = MESSAGE)
+BUBBLE_DIET
+str(BUBBLE_DIET)
+```
+
